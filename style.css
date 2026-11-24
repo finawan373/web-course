@@ -1,0 +1,134 @@
+/* Lecture 3 hands-on: style Kahvila Kaarna.
+   Edit only this file. Don't touch index.html.
+   Save, then reload the page in the browser after every step. */
+
+
+/* 1. Prove the stylesheet is linked.
+      body { background: pink; }
+      Page turns pink? Good, delete the line and carry on.
+      Nothing happens? Check the <link> in index.html and the file name. */
+:root {
+  --text: #2b211b;      /* Dark espresso brown (Contrast on --bg: ~14:1) */
+  --bg: #faf6f0;        /* Warm oat/cream background */
+  --brand: #8c3b19;     /* Warm roasted terracotta (Contrast on --bg: ~6.8:1) */
+  --card-bg: #ffffff;   /* Clean white for menu cards */
+  --border: #e2d6c8;    /* Soft latte border */
+}
+
+/* 2. Typography on body:
+      a font-family (end with a generic family like sans-serif),
+      line-height: 1.5,
+      max-width: 65ch, and centre it with margin: 0 auto.
+      Add some padding so text doesn't touch the screen edge. */
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  max-width: 65ch;
+  margin: 0 auto;
+  padding: 1.5rem;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+/* 3. Colours: pick three and name them in :root, for example
+      :root {
+        --text: #...;
+        --bg: #...;
+        --brand: #...;
+      }
+      Use them with var(--text) and so on.
+      Check the contrast in the DevTools colour picker: at least 4.5 : 1. */
+h1, h2, h3 {
+  color: var(--brand);
+  line-height: 1.2;
+}
+
+/* 4. Links: a colour, a :hover style, and a clearly visible
+      :focus-visible outline. Tab through the page to test it.
+      The nav links are too small to tap right now (the browser's
+      defaults fail the 24 px target size rule). Give them some
+      padding, or put the list items side by side with space between. */
+
+a {
+  color: var(--brand);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+a:hover {
+  color: var(--text);
+  background-color: var(--border);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--brand);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.5rem 0.85rem; /* Ensures target size is well over 24px */
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background-color: var(--card-bg);
+}
+
+nav a:hover {
+  background-color: var(--brand);
+  color: var(--card-bg);
+}
+/* 5. Turn each article into a card: padding, border,
+      border-radius, and some space between the cards.
+      Style .price and .highlight too. */
+
+
+article {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 4px rgba(43, 33, 27, 0.05);
+}
+
+article h3 {
+  margin-top: 0;
+}
+.price {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--brand);
+  margin-top: 0.5rem;
+}
+
+.highlight {
+  background-color: #f3e5d8;
+  border-left: 4px solid var(--brand);
+  padding: 0.75rem 1rem;
+  border-radius: 0 6px 6px 0;
+  font-weight: 500;
+}
+
+/* Bonus polish: Clean styling for the opening hours table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  background-color: var(--card-bg);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background-color: var(--brand);
+  color: var(--card-bg);
+}

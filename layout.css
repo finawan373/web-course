@@ -1,0 +1,94 @@
+/* Lecture 4 hands-on: make Kahvila Kaarna responsive. */
+
+/* Ensure padding and borders don't break 320px width calculations */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 3. Footer at the bottom, even on a short page.
+   5. Long words and links must never push the page wider. */
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+  margin: 0 auto; /* Keeps page centred while overriding top/bottom margins */
+  overflow-wrap: break-word;
+}
+
+/* 1. Header: logo on the left, nav on the right. */
+header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 2. Nav: links in a row with gap between them. */
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0.5rem 0.85rem; /* Ensures at least 24px tap target height */
+}
+
+/* 4. Menu cards side by side when there is room. */
+#menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(18rem, 100%), 1fr));
+  gap: 1rem;
+}
+
+#menu h2 {
+  grid-column: 1 / -1;
+  margin-bottom: 0;
+}
+
+/* Let grid gap control spacing between cards instead of style.css margin-bottom */
+#menu article {
+  margin-bottom: 0;
+}
+
+/* 6. Dark mode: swap colour tokens using the exact variable names from style.css */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f5efe8;      /* Warm light cream text (Contrast on --bg: ~14.5:1) */
+    --bg: #1c1613;        /* Deep espresso dark background */
+    --brand: #f09266;     /* Warm sunlit terracotta (Contrast on --bg: ~7.6:1) */
+    --card-bg: #29201c;   /* Elevated dark roast card surface */
+    --border: #473932;    /* Subtle mocha border */
+  }
+
+  /* Override the light-mode highlight background from style.css */
+  .highlight {
+    background-color: #362923;
+  }
+}
+
+/* 7. The wide layout, from 48rem (768 px) up. */
+@media (min-width: 48rem) {
+  body {
+    max-width: 72rem;
+  }
+
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+  }
+
+  /* Everything in main except #hours and #contact spans both columns */
+  main > :not(#hours, #contact) {
+    grid-column: 1 / -1;
+  }
+}
